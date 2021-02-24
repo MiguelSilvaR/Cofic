@@ -1,0 +1,18 @@
+.boton {
+    background-image: url("../../../assets/img/folder.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: black;
+    height: 200px;
+    box-sizing: border-box !important;
+    margin: 10px;
+    width: 250px;
+    cursor: pointer;
+}
+
+p {
+    margin-top: 50px;
+    font-size: 18px;
+    color: #272727;
+    font-weight: bold;
+}

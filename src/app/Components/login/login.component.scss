@@ -1,0 +1,34 @@
+.imagen {
+    background: green;
+    height: 50%;
+}
+
+.formato {
+    background: blue;
+    height: 50%;
+}
+
+.row {
+    height: 100%;
+}
+
+input {
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: visible;
+    z-index: 1;
+}
+
+fa-icon {
+    margin-right: -25px;
+    margin-top: 10px;
+    overflow: visible;
+    z-index: 3;
+}
+
+.boton {
+    color: white;
+    background: #00CE81;
+    font-size: 30px;
+}

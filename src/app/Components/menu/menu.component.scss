@@ -1,0 +1,13 @@
+.boton {
+    background: linear-gradient(#004092, #020202, transparent), url("../../../assets/img/bg-menu.jpg") no-repeat center;
+    background-size: cover;
+    color: white;
+    cursor: pointer;
+    height: 200px;
+    box-sizing: border-box !important;
+    margin: 10px;
+    width: 250px;
+    &:hover {
+        background: linear-gradient(rgb(61, 60, 60), rgb(61, 60, 60), transparent), url("../../../assets/img/bg-menu.jpg") no-repeat center;
+    }
+}

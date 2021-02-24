@@ -1,0 +1,19 @@
+<table class="table table-striped table-bordered table-dark">
+  <thead>
+    <tr>
+      <th *ngFor="let head of headers" scope="col">{{ head }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let element of data">
+      <td *ngFor="let item of element">{{item}}</td>
+      <td class="icons">
+        <fa-icon [icon]="faDownload" class="icono" *ngIf="operations[0]"></fa-icon>
+        <fa-icon [icon]="faTrash" class="icono" *ngIf="operations[1]"></fa-icon>
+        <fa-icon [icon]="faCheckCircle" class="icono" *ngIf="operations[2]"></fa-icon>
+        <fa-icon [icon]="faSearch" class="icono" *ngIf="operations[3]"></fa-icon>
+        <fa-icon [icon]="faPen" class="icono" *ngIf="operations[4]"></fa-icon>
+      </td>
+    </tr>
+  </tbody>
+</table>
