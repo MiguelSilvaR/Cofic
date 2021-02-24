@@ -57,7 +57,7 @@ import { GraphQLModule } from './GraphQL/graphql.module';
     FormsModule,
     HttpClientModule,
     NgxDropzoneModule,
-    GraphQLModule
+    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,12 +9,12 @@
             </div>
             <div class="campo w-100 d-flex justify-content-center">
                 <fa-icon [icon]="faUser" class="icono"></fa-icon>
-                <input type="text" class="w-100" placeholder="Nombre de usuario">
+                <input [(ngModel)]="user" type="text" class="w-100" placeholder="Nombre de usuario">
             </div>
             <br>
             <div class="campo w-100 d-flex justify-content-center">
                 <fa-icon [icon]="faLock" class="icono"></fa-icon>
-                <input type="text" class="w-100" placeholder="Contraseña">
+                <input [(ngModel)]="password" type="password" class="w-100" placeholder="Contraseña">
             </div>
             <br>
             <button class="btn btn-dark w-100">Ingresar</button>
