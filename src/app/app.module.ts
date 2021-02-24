@@ -26,6 +26,7 @@ import { AdministradorComponent } from './Components/administrador/administrador
 import { AgregarUserComponent } from './Components/agregar-user/agregar-user.component';
 import { FilesAdminComponent } from './Components/files-admin/files-admin.component';
 import { CrearAvisoComponent } from './Components/crear-aviso/crear-aviso.component';
+import { GraphQLModule } from './GraphQL/graphql.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CrearAvisoComponent } from './Components/crear-aviso/crear-aviso.compon
     NgbModule,
     FormsModule,
     HttpClientModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
