@@ -53,17 +53,6 @@ export class AuthService {
       }
     }
   }
-  
-  // getRefreshOptions(): MutationOptions {
-  //   return {
-  //     mutation: refreshToken,
-  //     variables: {
-  //       token: {
-  //         token: this.getToken()
-  //       }
-  //     }
-  //   }
-  // }
 
   getToken(): string {
     return this.tokenService.jwtToken;
@@ -90,14 +79,8 @@ export class AuthService {
     })
   }
 
-  // refreshToken() {
-  //   this.mutation.executeMutation(this.getRefreshOptions()).subscribe(
-  //     (data) => {
-  //       console.log(data.data.refreshToken.token)
-  //       this.setToken(data.data.refreshToken.token)
-  //     },
-  //     (err) => console.log(err)
-  //   )
-  // }
+  getDecodedToken(): any {
+    return this.tokenService.getDecodedValues();
+  }
 
 }

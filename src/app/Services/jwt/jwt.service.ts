@@ -11,9 +11,14 @@ export class JWTService {
 
   constructor() {
   }
+
+  getDecodedValues(): any {
+    return this.decodedToken
+  }
   
   deleteToken() {
     this.jwtToken = "";
+    this.decodedToken = null
   }
 
   setToken(token: string) {

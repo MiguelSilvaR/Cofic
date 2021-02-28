@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faUser, faLock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../Services/auth/auth.service';
 
@@ -18,25 +19,28 @@ export class LoginComponent implements OnInit {
   password: string = '';
   token: string = '';
 
-  constructor(private authService:AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if (this.authService.isTokenValid()) {
+      this.router.navigate(["/menu"])
+    }
+  }
 
   ngOnInit(): void {
-    console.log("Login");
+    //console.log("Login");
   }
-  
-  submit(): void{
-    console.log("Submit");
+
+  submit(): void {
     this.authService.login(this.user, this.password).subscribe(
-      (data :any ) => {
-        console.log(data);
-        console.log(data['data']['tokenAuth']['token']);
+      (data: any) => {
         this.authService.setToken(data['data']['tokenAuth']['token']);
       },
-      (err :any) => {
-        console.log("Credenciales invalidas");
+      (err: any) => {
         alert("Usuario o contrasena equivocadas");
       }
-      );
+    );
   }
 
 }

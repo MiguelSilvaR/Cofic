@@ -14,23 +14,24 @@ import { NotificacionesComponent } from './Components/notificaciones/notificacio
 import { OperadorFormComponent } from './Components/operador-form/operador-form.component';
 import { OperadorComponent } from './Components/operador/operador.component';
 import { SupervisorComponent } from './Components/supervisor/supervisor.component';
+import { AuthGuard } from './Guard/Auth/auth.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
-  { path: "menu", component: MenuComponent },
-  { path: "menu-files", component: MenuFilesComponent },
-  { path: "nomina", component: NominasComponent },
-  { path: "contabilidad", component: ContabilidadComponent },
-  { path: "recursos-humanos", component: ContabilidadComponent },
-  { path: "documentacion", component: DocumentacionComponent },
-  { path: "operador", component: OperadorComponent },
-  { path: "operador-form", component: OperadorFormComponent },
-  { path: "supervisor", component: SupervisorComponent },
-  { path: "notificacion", component: NotificacionesComponent },
-  { path: "administrador", component: AdministradorComponent },
-  { path: "agregar-usuario", component: AgregarUserComponent },
-  { path: "crear-aviso", component: CrearAvisoComponent },
-  { path: "files-admin", component: FilesAdminComponent },
+  { path: "menu", component: MenuComponent, canActivate: [AuthGuard] },
+  { path: "menu-files", component: MenuFilesComponent, canActivate: [AuthGuard] },
+  { path: "nomina", component: NominasComponent, canActivate: [AuthGuard] },
+  { path: "contabilidad", component: ContabilidadComponent, canActivate: [AuthGuard] },
+  { path: "recursos-humanos", component: ContabilidadComponent, canActivate: [AuthGuard] },
+  { path: "documentacion", component: DocumentacionComponent, canActivate: [AuthGuard] },
+  { path: "operador", component: OperadorComponent, canActivate: [AuthGuard] },
+  { path: "operador-form", component: OperadorFormComponent, canActivate: [AuthGuard] },
+  { path: "supervisor", component: SupervisorComponent, canActivate: [AuthGuard] },
+  { path: "notificacion", component: NotificacionesComponent, canActivate: [AuthGuard] },
+  { path: "administrador", component: AdministradorComponent, canActivate: [AuthGuard] },
+  { path: "agregar-usuario", component: AgregarUserComponent, canActivate: [AuthGuard] },
+  { path: "crear-aviso", component: CrearAvisoComponent, canActivate: [AuthGuard] },
+  { path: "files-admin", component: FilesAdminComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 
