@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
   faUser: IconDefinition = faUser;
   faLock: IconDefinition = faLock;
 
+  user: string = '';
+  password: string = '';
+
   constructor() { }
 
   ngOnInit(): void {

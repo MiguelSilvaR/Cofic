@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "Cofic"
+  "defaultProject": "Cofic",
+  "cli": {
+    "analytics": false
+  }
 }
