@@ -42,25 +42,28 @@ export class AuthService {
     }
   }
 
-  getLoginOptions(user: any): MutationOptions {
+  getLoginOptions(username: any, password: any): MutationOptions {
     return {
       mutation: login,
       variables: {
-        user
-      }
-    }
-  }
-  
-  getRefreshOptions(): MutationOptions {
-    return {
-      mutation: refreshToken,
-      variables: {
-        token: {
-          token: this.getToken()
+        token:{
+          username,
+          password
         }
       }
     }
   }
+  
+  // getRefreshOptions(): MutationOptions {
+  //   return {
+  //     mutation: refreshToken,
+  //     variables: {
+  //       token: {
+  //         token: this.getToken()
+  //       }
+  //     }
+  //   }
+  // }
 
   getToken(): string {
     return this.tokenService.jwtToken;
@@ -71,13 +74,13 @@ export class AuthService {
     this.storage.set("token", token);
   }
 
-  login(user: any): any {
-    return this.mutation.executeMutation(this.getLoginOptions(user))
+  login(user: any, password: any): any {
+    return this.mutation.executeMutation(this.getLoginOptions(user,password))
   }
 
   logout() {
     this.storage.remove("token");
-    this.tokenService.deleteToken()
+    this.tokenService.deleteToken();
     console.log(this.tokenService.jwtToken)
   }
 
@@ -87,14 +90,14 @@ export class AuthService {
     })
   }
 
-  refreshToken() {
-    this.mutation.executeMutation(this.getRefreshOptions()).subscribe(
-      (data) => {
-        console.log(data.data.refreshToken.token)
-        this.setToken(data.data.refreshToken.token)
-      },
-      (err) => console.log(err)
-    )
-  }
+  // refreshToken() {
+  //   this.mutation.executeMutation(this.getRefreshOptions()).subscribe(
+  //     (data) => {
+  //       console.log(data.data.refreshToken.token)
+  //       this.setToken(data.data.refreshToken.token)
+  //     },
+  //     (err) => console.log(err)
+  //   )
+  // }
 
 }
