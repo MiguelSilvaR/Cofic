@@ -1,6 +1,6 @@
 <div class="px-3">
     <div class="">
-        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/menu-files']">Contabilidad</a> > 2021</p>
+        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/menu-files/contabilidad']">Contabilidad</a> > {{ year }}</p>
     </div>
 
     <form class="mb-5">
@@ -33,6 +33,6 @@
         <button (click)="onClick()" class="btn btn-info mt-3 search">Buscar</button>
     </form>
 
-    <app-tabla [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+    <app-tabla (accion)="descargar($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
     <p class="conta">Reportar documento perdido</p>
 </div>

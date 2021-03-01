@@ -13,17 +13,18 @@ import { NominasComponent } from './Components/nominas/nominas.component';
 import { NotificacionesComponent } from './Components/notificaciones/notificaciones.component';
 import { OperadorFormComponent } from './Components/operador-form/operador-form.component';
 import { OperadorComponent } from './Components/operador/operador.component';
+import { RecursosHumanosComponent } from './Components/recursos-humanos/recursos-humanos.component';
 import { SupervisorComponent } from './Components/supervisor/supervisor.component';
 import { AuthGuard } from './Guard/Auth/auth.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "menu", component: MenuComponent, canActivate: [AuthGuard] },
-  { path: "menu-files", component: MenuFilesComponent, canActivate: [AuthGuard] },
-  { path: "nomina", component: NominasComponent, canActivate: [AuthGuard] },
-  { path: "contabilidad", component: ContabilidadComponent, canActivate: [AuthGuard] },
-  { path: "recursos-humanos", component: ContabilidadComponent, canActivate: [AuthGuard] },
-  { path: "documentacion", component: DocumentacionComponent, canActivate: [AuthGuard] },
+  { path: "menu-files/:department", component: MenuFilesComponent, canActivate: [AuthGuard] },
+  { path: "nomina/:year", component: NominasComponent, canActivate: [AuthGuard] },
+  { path: "contabilidad/:year", component: ContabilidadComponent, canActivate: [AuthGuard] },
+  { path: "recursoshumanos/:year", component: RecursosHumanosComponent, canActivate: [AuthGuard] },
+  { path: "documentacion/:year", component: DocumentacionComponent, canActivate: [AuthGuard] },
   { path: "operador", component: OperadorComponent, canActivate: [AuthGuard] },
   { path: "operador-form", component: OperadorFormComponent, canActivate: [AuthGuard] },
   { path: "supervisor", component: SupervisorComponent, canActivate: [AuthGuard] },

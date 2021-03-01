@@ -1,8 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
-import { ViewFlags } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { MutationOptions } from '@apollo/client/core';
-import jwtDecode from 'jwt-decode';
 import { login } from '../../Operations/mutation';
 import { JWTService } from '../jwt/jwt.service';
 import { LocalStorageService } from '../localStorage/local-storage.service';
@@ -14,12 +12,13 @@ import { MutationService } from '../Mutation/mutation.service';
 export class AuthService {
 
   token!: string
+  rol!: any
+  departamentos!: any[]
 
   constructor(
     private mutation: MutationService,
     private storage: LocalStorageService,
-    private tokenService: JWTService
-  ) { }
+    private tokenService: JWTService) { }
 
   isTokenValid(): boolean {
     if (this.tokenService.jwtToken === "")
@@ -31,13 +30,18 @@ export class AuthService {
 
   initializeTokenInApp(): void {
     if (this.storage.exists("token")) {
+      this.rol = this.storage.get("rol");
+      let dep = this.storage.get("departamentos")
+      this.departamentos =  dep != null ?  JSON.parse(dep) : [];
       let token = this.storage.get("token");
       this.tokenService.setToken(token == null ? "" : token);
-      //console.log(this.isTokenValid())
       if (!this.isTokenValid()) {
-        //console.log(this.isTokenValid())
         this.storage.remove("token");
+        this.storage.remove("departamentos");
+        this.storage.remove("rol");
         this.tokenService.deleteToken()
+      } else {
+
       }
     }
   }
@@ -46,7 +50,7 @@ export class AuthService {
     return {
       mutation: login,
       variables: {
-        token:{
+        token: {
           username,
           password
         }
@@ -63,12 +67,19 @@ export class AuthService {
     this.storage.set("token", token);
   }
 
+  setInfo(): void {
+    this.storage.set("rol", this.rol);
+    this.storage.set("departamentos", JSON.stringify(this.departamentos));
+  }
+
   login(user: any, password: any): any {
-    return this.mutation.executeMutation(this.getLoginOptions(user,password))
+    return this.mutation.executeMutation(this.getLoginOptions(user, password))
   }
 
   logout() {
     this.storage.remove("token");
+    this.storage.remove("departamentos");
+    this.storage.remove("rol");
     this.tokenService.deleteToken();
     console.log(this.tokenService.jwtToken)
   }
