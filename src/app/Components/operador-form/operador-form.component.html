@@ -30,10 +30,7 @@
                         <label for="periodo" class="mr-2">Periodo*: </label>
                         <select class="form-control" id="periodo" formControlName="periodo">
                             <option value="">Seleccione un periodo</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            <option *ngFor="let year of years; let i = index" [value]="2021 - i">{{ 2021 - i }}</option>
                         </select>
                     </div>
                     <small id="clienteError"
@@ -45,10 +42,12 @@
                         <label for="tipoDoc" class="mr-2">Tipo de documento*: </label>
                         <select class="form-control" id="tipoDoc" formControlName="tipoDoc">
                             <option value="">Seleccione un tipo de documento</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            <option value="pdf">PDF</option>
+                            <option value="xml">XML</option>
+                            <option value="xls">XLS</option>
+                            <option value="rar">RAR</option>
+                            <option value="zip">ZIP</option>
+                            <option value="doc">DOC</option>
                         </select>
                     </div>
                 </div>

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { QueryHttp } from 'src/app/Interfaces/QueryHttp.interface';
-import { MutationService } from '../Mutation/mutation.service';
-import { auth } from 'src/app/Operations/query';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +12,10 @@ export class FilesService {
 
   constructor(
     private http: HttpClient,
-    private mutation: MutationService
+    private auth: AuthService
   ) { }
 
-  getQueryInfo(): QueryHttp {
+  getQueryInfo(periodo: any): any {
     return {
       query: `
         mutation fileUpload($file: UploadFileMutationInput!){
@@ -24,7 +23,7 @@ export class FilesService {
             success
           }
         }`,
-      variables: { file: { nombre: "prueba.pdf", categoria: "prueba" } },
+      variables: {"file": {"nombre": "texto.txt", "departamento": this.auth.departamentos.join(), "correoCliente": "msr@msr.com", "periodo": periodo}},
       "operationName": "fileUpload"
     }
   }
@@ -35,38 +34,16 @@ export class FilesService {
     }
   }
 
-  getFormData(file: File): FormData {
+  getFormData(file: File, periodo: any): FormData {
     let fd = new FormData()
-    let operations = JSON.stringify(this.getQueryInfo());
+    let operations = JSON.stringify(this.getQueryInfo(periodo));
     fd.append('operations', operations)
-    //fd.append('map', JSON.stringify(this.getMap()))
     fd.append('archivo', file, file.name)
     return fd;
   }
 
-  sendFile(file: File) {
-    console.log(this.getFormData(file))
-    return this.http.post(this.url, this.getFormData(file), { headers: new HttpHeaders({ Authorization: "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1zckBtc3IuY29tIiwiZXhwIjoxNjE0NDI0Mzg4LCJvcmlnSWF0IjoxNjE0Mzk1NTg4fQ.QiHx41030sjJMbw2YKUTdd3pfusMpQGy81u-JAtyxbg" }) })
+  sendFile(file: File, periodo: any) {
+    console.log(this.getFormData(file, periodo))
+    return this.http.post(this.url, this.getFormData(file, periodo), { headers: this.auth.generateAuthHeader()})
   }
-
-  login() {
-    this.mutation.executeMutation(this.getLoginOptions({ "username": "msr@msr.com", "password": "skaud234!..DAG" })).subscribe(
-      (data) => {
-        console.log(data)
-      },
-      (err) => {
-        console.log(err)
-      }
-    )
-  }
-
-  getLoginOptions(usuario: any): any {
-    return {
-      mutation: auth,
-      variables: {
-        usuario
-      }
-    }
-  }
-
 }

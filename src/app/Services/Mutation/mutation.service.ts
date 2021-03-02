@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FetchResult, MutationOptions } from '@apollo/client';
+import { DocumentNode, FetchResult, MutationOptions, TypedDocumentNode } from '@apollo/client';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
@@ -16,5 +16,14 @@ export class MutationService {
     return this.apollo.mutate(
       options
     );
+  }
+
+  getOptions(mutation: DocumentNode | TypedDocumentNode<any, Record<string, any>>,
+    variables?: Record<string, any> | undefined, context?: any): MutationOptions {
+    return {
+      mutation,
+      variables,
+      context
+    }
   }
 }

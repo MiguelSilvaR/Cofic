@@ -37,3 +37,37 @@ export const getPossibleFiles = gql`
         }
     }
 `
+
+export const allUsersAdmin = gql`
+    query allUsuarios {
+        allUsuarios {
+            edges {
+                node {
+                    username
+                    email
+                    telefono
+                    rol
+                    activo
+                }
+            }
+        }
+    }
+`
+
+export const getAllFiles = gql`
+    query allFiles {
+        allFiles {
+            edges {
+                node {
+                    nombre
+                    archivo
+                    cliente {
+                        nombreContacto
+                    }
+                    createdAt
+                    estado
+                }
+            }
+        }
+    }
+`

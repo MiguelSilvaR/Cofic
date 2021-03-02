@@ -1,5 +1,5 @@
 export interface OperadorForm {
     cliente: string
-    periodo: string
+    periodo: number
     tipoDoc: string
 }

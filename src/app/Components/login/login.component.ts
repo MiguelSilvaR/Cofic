@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
         console.log(this.authService.departamentos)
         this.authService.rol = data.data.miUsuario.rol
         this.authService.setInfo()
+        this.authService.changeState()
         this.router.navigate(["/menu"])
       },
       (err) => {

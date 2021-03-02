@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MutationOptions } from '@apollo/client/core';
+import { BehaviorSubject } from 'rxjs';
 import { login } from '../../Operations/mutation';
 import { JWTService } from '../jwt/jwt.service';
 import { LocalStorageService } from '../localStorage/local-storage.service';
@@ -15,14 +16,22 @@ export class AuthService {
   rol!: any
   departamentos!: any[]
 
+  public myObservable = new BehaviorSubject<boolean>(false);
+  public myObservable$ = this.myObservable.asObservable();
+
   constructor(
     private mutation: MutationService,
     private storage: LocalStorageService,
     private tokenService: JWTService) { }
 
+  changeState() {
+    this.myObservable.next(!this.myObservable.value)
+  }
+
   isTokenValid(): boolean {
-    if (this.tokenService.jwtToken === "")
+    if (this.tokenService.jwtToken === "") {
       return false;
+    }
     else if (this.tokenService.isTokenExpired())
       return false;
     return true;
@@ -32,16 +41,16 @@ export class AuthService {
     if (this.storage.exists("token")) {
       this.rol = this.storage.get("rol");
       let dep = this.storage.get("departamentos")
-      this.departamentos =  dep != null ?  JSON.parse(dep) : [];
+      this.departamentos = dep != null ? JSON.parse(dep) : [];
       let token = this.storage.get("token");
       this.tokenService.setToken(token == null ? "" : token);
+      this.changeState()
       if (!this.isTokenValid()) {
         this.storage.remove("token");
         this.storage.remove("departamentos");
         this.storage.remove("rol");
         this.tokenService.deleteToken()
-      } else {
-
+        this.changeState()
       }
     }
   }
@@ -77,6 +86,7 @@ export class AuthService {
   }
 
   logout() {
+    this.changeState();
     this.storage.remove("token");
     this.storage.remove("departamentos");
     this.storage.remove("rol");
@@ -85,6 +95,7 @@ export class AuthService {
   }
 
   generateAuthHeader(): HttpHeaders {
+    console.log("JWT " + this.getToken())
     return new HttpHeaders({
       Authorization: "JWT " + this.getToken()
     })

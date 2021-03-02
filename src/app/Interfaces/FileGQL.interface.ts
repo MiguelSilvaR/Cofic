@@ -4,5 +4,7 @@ export interface FileGQL {
 
 interface file {
     nombre: string
-    categoria: string
+    departamento: string
+    correoCliente: string
+    periodo: number
 }

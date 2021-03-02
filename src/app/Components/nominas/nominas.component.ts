@@ -35,7 +35,7 @@ export class NominasComponent implements OnInit {
   ngOnInit(): void {
     this.headers = ["Nombre del documento", "Tipo de archivo", "Periodo de la información", "Fecha de carga", "Operaciones"]
     this.operations = [true, false, false, false, false]
-    //this.getFiles()
+    this.getFiles()
   }
 
   getFiles(): void {

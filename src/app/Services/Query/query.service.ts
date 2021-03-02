@@ -16,7 +16,9 @@ export class QueryService {
     return this.apollo.watchQuery(options).valueChanges
   }
 
-  getOptions(query: DocumentNode | TypedDocumentNode<any, Record<string, any>>, fetchPolicy: "cache-first" | "network-only" | "cache-only" | "no-cache" | "standby" | undefined, variables?:Record<string, any> | undefined, context?: any): QueryOptions {
+  getOptions(query: DocumentNode | TypedDocumentNode<any, Record<string, any>>,
+    fetchPolicy: "cache-first" | "network-only" | "cache-only" | "no-cache" | "standby" | undefined,
+    variables?: Record<string, any> | undefined, context?: any): QueryOptions {
     return {
       query,
       fetchPolicy,

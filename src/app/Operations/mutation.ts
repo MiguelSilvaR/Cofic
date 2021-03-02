@@ -7,3 +7,13 @@ export const login = gql`
 		}
 	}
 `
+
+export const nuevoAnuncio = gql`
+	mutation createAnuncio($anuncio: CreateAnuncioMutationInput!) {
+		createAnuncio(input: $anuncio) {
+			anuncio{
+				id
+			}
+		}
+	}
+`
