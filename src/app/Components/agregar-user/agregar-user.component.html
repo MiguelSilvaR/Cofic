@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row mt-5">
-        <p class="ml-3">Portal > Carga de documentos</p>
+        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/administrador']">Usuarios</a> > Agregar Usuario</p>
     </div>
     <div class="mt-5">
         <form class="row" action="" [formGroup]="agregarUser">
@@ -8,34 +8,36 @@
                 <div class="form-group">
                     <div class="input-group mb-4 d-flex align-items-center">
                         <label for="user" class="mr-2 titulo">Tipo de usuario*: </label>
-                        <select class="form-control" id="user" formControlName="user">
+                        <select class="form-control" id="user" formControlName="user" #user
+                            (change)="onChange($event, user.value)">
                             <option value="">Selecciona una opción</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            <option value="operador">Operador</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="recepcion">Recepcion</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="supervisor">Supervisor</option>
                         </select>
                     </div>
-                    <div class="input-group mb-4 d-flex align-items-center">
+                    <div class="input-group mb-4 d-flex align-items-center" *ngIf="!operador && !admin && !supervisor">
                         <label for="cliente" class="mr-2 titulo">Razón Social*: </label>
                         <input type="text" class="form-control" formControlName="razonSocial">
                     </div>
-                    <div class="input-group mb-4 d-flex align-items-center">
+                    <div class="input-group mb-4 d-flex align-items-center" *ngIf="!operador && !admin && !supervisor">
                         <label for="cliente" class="mr-2 titulo">Nombre de contacto*: </label>
                         <input type="text" class="form-control" formControlName="nombre">
                     </div>
-                    <div class="input-group mb-4 d-flex align-items-center">
+                    <div class="input-group mb-4 d-flex align-items-center" *ngIf="!operador && !admin && !supervisor">
                         <label for="cliente" class="mr-2 titulo">RFC*: </label>
                         <input type="text" class="form-control" formControlName="rfc">
                     </div>
-                    <div class="input-group mb-4 d-flex align-items-center">
+                    <div class="input-group mb-4 d-flex align-items-center" *ngIf="!operador && !admin && !supervisor">
                         <label for="cliente" class="mr-2 titulo">Teléfono*: </label>
                         <input type="tel" class="form-control" formControlName="phono">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="input-group mb-4 d-flex align-items-center">
+                <div class="input-group mb-4 d-flex align-items-center" *ngIf="!operador && !admin && !supervisor">
                     <label for="cliente" class="mr-2 titulo">Domicilio*: </label>
                     <input type="text" class="form-control" formControlName="domicilio">
                 </div>
@@ -43,35 +45,64 @@
                     <label for="cliente" class="mr-2 titulo">Correo*: </label>
                     <input type="text" class="form-control" formControlName="correo">
                 </div>
-                <div class="input-group mb-4 d-flex flex-column">
+                <div class="input-group mb-4 d-flex align-items-center">
+                    <label for="cliente" class="mr-2 titulo">Contraseña*: </label>
+                    <input type="password" class="form-control" formControlName="password">
+                </div>
+                <div class="input-group mb-4 d-flex flex-column" *ngIf="!admin">
                     <label for="cliente" class="mr-2 titulo">Departamentos*: </label>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" formControlName="nomina">Nóminas
-                        </label>
+                    <div *ngIf="operador; else elseBlock">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio" id="exampleRadios1" value="nomina"
+                                formControlName="radio">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Nóminas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio" id="exampleRadios2" value="contabilidad"
+                                formControlName="radio">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Contabilidad
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="radio" id="exampleRadios3" value="recursoshumanos"
+                                formControlName="radio">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Recursos humanos
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" formControlName="conta">Contabilidad
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" formControlName="rh">Recursos humanos
-                        </label>
-                    </div>
+                    <ng-template #elseBlock>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" formControlName="nomina">Nóminas
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" formControlName="conta">Contabilidad
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" formControlName="rh">Recursos humanos
+                            </label>
+                        </div>
+                    </ng-template>
                 </div>
                 <div class="input-group mb-4 d-flex flex-column">
                     <div class="form-check-inline">
                         <label class="form-check-label">
-                          <input type="checkbox" class="form-check-input" formControlName="activo">Activo
+                            <input type="checkbox" class="form-check-input" formControlName="activo">Activo
                         </label>
-                      </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-info mr-3" (click)="sendInfo()">Guardar</button>
-                <button class="btn btn-danger">Cancelar</button>
+                <button class="btn btn-danger" [routerLink]="['/administrador']" routerLinkActive="router-link-active" >Cancelar</button>
             </div>
         </form>
     </div>

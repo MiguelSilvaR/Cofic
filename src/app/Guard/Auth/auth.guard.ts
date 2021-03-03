@@ -14,12 +14,12 @@ export class AuthGuard implements CanActivate {
   }
 
   routesAllowed: any = {
-    "cliente": [ "menu-files", "menu"],
-    "services": ["nomina", "contabilidad", "resursoshumanos", "documentacion"],
+    "cliente": [ "menu-files", "menu", "documentacion"],
+    "services": ["nomina", "contabilidad", "resursoshumanos"],
     "recepcion": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso"],
     "operador": ["menu-files", "menu", "operador", "operador-form"],
-    "supervisor": ["menu-files", "menu", "supervisor", "notificacion"],
-    "administrador": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso", "files-admin","reports"]
+    "supervisor": ["menu-files", "menu", "supervisor", "notificacion", "operador-form"],
+    "administrador": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso", "files-admin", "operador-form", "notificacion", "reports"]
   }
 
   canActivate(
@@ -34,13 +34,13 @@ export class AuthGuard implements CanActivate {
         return true
       } 
       if (this.routesAllowed[this.auth.rol].includes(currentURL)) {
+        console.log("object")
         return true
       }
       if (this.auth.rol == "cliente" && !this.auth.departamentos.includes(currentURL)) {
         this.router.navigateByUrl("login")
         return false
       }
-      return true
     }
     this.router.navigateByUrl("login")
     return false;

@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.query.executeQuery(this.getMiUsuarioOptions()).subscribe(
       (data: any) => {
         console.log(data.data.miUsuario)
-        this.authService.departamentos = data.data.miUsuario.departamento.split(",")
+        this.authService.departamentos = data.data.miUsuario.departamento != null ? data.data.miUsuario.departamento.split(",") : ""
         console.log(this.authService.departamentos)
         this.authService.rol = data.data.miUsuario.rol
         this.authService.setInfo()

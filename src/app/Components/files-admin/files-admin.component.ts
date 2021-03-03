@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faCalendar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { getAllFiles, getFile } from 'src/app/Operations/query';
+import { allClientes, getAllFiles, getFile } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
 import { compareAsc } from 'date-fns'
@@ -25,6 +25,7 @@ export class FilesAdminComponent implements OnInit {
   headers: any = [];
   operations: any = [];
   data: any = [];
+  clientes: any = []
 
   constructor(
     private query: QueryService,
@@ -34,6 +35,7 @@ export class FilesAdminComponent implements OnInit {
   ngOnInit(): void {
     this.headers = ["Nombre del documento", "Cliente", "Tipo de archivo", "Fecha de carga", "Estado", "Operaciones"]
     this.operations = [true, true, true, false, false]
+    this.getClientes()
   }
 
   getValues() {
@@ -46,6 +48,18 @@ export class FilesAdminComponent implements OnInit {
   onClick() {
     console.log(this.getValues())
     this.getAllFiles()
+  }
+
+  getClientes(): void {
+    this.query.executeQuery(
+      this.query.getOptions(allClientes, "network-only", undefined, { headers: this.auth.generateAuthHeader() })
+    ).subscribe(
+      (data: any) => {
+        console.log(data)
+        this.clientes = data.data.allClientes
+      },
+      (err) => console.log(err)
+    )
   }
 
   getAllFiles() {
@@ -64,10 +78,10 @@ export class FilesAdminComponent implements OnInit {
         
         this.data = tempArr.filter(
           (value: any) => {
-            let since = new Date(this.desde.year,this.desde.month-1,this.desde.day)
+            let since = this.desde.year == 0 ? new Date(8640000000000000) :new Date(this.desde.year, this.desde.month - 1, this.desde.day)
             let until = new Date(this.hasta.year,this.hasta.month-1,this.hasta.day)
             let fileFecha = new Date(value[3])
-            return compareAsc(fileFecha, since) == 1 && compareAsc(until, fileFecha) == 1 
+            return compareAsc(since, fileFecha) == 1 && compareAsc(fileFecha, until) == 1 
             && (value[4] == filters.estado || filters.estado == "todos")
             && (value[1] == filters.cliente || filters.cliente == "todos")
           }
