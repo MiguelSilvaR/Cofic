@@ -16,4 +16,8 @@ export class DateService {
   getDefaultDesde(): NgbDateStruct {
     return { day: 0 , month: 0 , year: 0 }
   }
+
+  getString(date :NgbDateStruct){
+    return date.day + "-" + date.month + "-" + date.year;
+  }
 }

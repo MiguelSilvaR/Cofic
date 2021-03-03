@@ -15,6 +15,7 @@ import { OperadorFormComponent } from './Components/operador-form/operador-form.
 import { OperadorComponent } from './Components/operador/operador.component';
 import { SupervisorComponent } from './Components/supervisor/supervisor.component';
 import { AuthGuard } from './Guard/Auth/auth.guard';
+import { ReportsComponent } from './Components/reports/reports.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: "agregar-usuario", component: AgregarUserComponent, canActivate: [AuthGuard] },
   { path: "crear-aviso", component: CrearAvisoComponent, canActivate: [AuthGuard] },
   { path: "files-admin", component: FilesAdminComponent, canActivate: [AuthGuard] },
+  { path: "reports", component: ReportsComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 
