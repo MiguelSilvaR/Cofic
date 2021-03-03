@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit {
     } else if (this.auth.rol == "supervisor") {
       this.menu = ["supervisor", "notificacion"]
     }else if (this.auth.rol == "recepcion") {
-      this.menu = ["administrador", "crear-aviso", "files-admin"]
+      this.menu = ["administrador", "crear-aviso"]
     }
   }
 
