@@ -77,11 +77,6 @@ export const getStatsUser = gql`
     }
 `
 
-export const getStats = gql`
-    query getStats($fechaInicio: Date!, $fechaFinal: Date!) {
-        getStats(fechaInicio: $fechaInicio, fechaFinal: $fechaFinal)
-    `
-
 export const allClientes = gql`
     query allClientes {
         allClientes {

@@ -6,7 +6,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartType } from 'chart.js';
 import { QueryService } from 'src/app/Services/Query/query.service';
 import { AuthService } from 'src/app/Services/auth/auth.service';
-import { getStats, getStatsUser, allUsersAdmin } from 'src/app/Operations/query';
+import { getStatsUser, allUsersAdmin } from 'src/app/Operations/query';
 
 @Component({
   selector: 'app-reports',
