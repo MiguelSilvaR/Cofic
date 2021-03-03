@@ -5,7 +5,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { allClientes, getAllFiles, getFile } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
-import { compareAsc } from 'date-fns'
+import { compareAsc, compareDesc } from 'date-fns'
 
 @Component({
   selector: 'app-files-admin',
@@ -81,7 +81,7 @@ export class FilesAdminComponent implements OnInit {
             let since = this.desde.year == 0 ? new Date(8640000000000000) :new Date(this.desde.year, this.desde.month - 1, this.desde.day)
             let until = new Date(this.hasta.year,this.hasta.month-1,this.hasta.day)
             let fileFecha = new Date(value[3])
-            return compareAsc(since, fileFecha) == 1 && compareAsc(fileFecha, until) == 1 
+            return compareDesc(since, fileFecha) == 1 && compareDesc(fileFecha, until) == 1 
             && (value[4] == filters.estado || filters.estado == "todos")
             && (value[1] == filters.cliente || filters.cliente == "todos")
           }
