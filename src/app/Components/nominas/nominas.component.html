@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="px-3">
     <div class="">
         <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/menu-files']">Nómina</a> > 2021</p>
@@ -35,4 +36,43 @@
 
     <app-tabla [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
     <p class="conta">Reportar documento perdido</p>
+=======
+<div class="px-3">
+    <div class="">
+        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/menu-files/nomina']">Nómina</a> > {{ year }}</p>
+    </div>
+
+    <form class="mb-5">
+        <div class="form-inline">
+            <div class="form-group mr-md-4 mt-3">
+                <div class="input-group d-flex align-items-center">
+                    <label for="desde" class="">Desde: </label>
+                    <input class="form-control" placeholder="Desde el inicio de los tiempos" name="desde"
+                        [(ngModel)]="desde" ngbDatepicker #d="ngbDatepicker" id="desde">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                            <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="input-group d-flex align-items-center">
+                    <label for="hasta" class="">Hasta: </label>
+                    <input class="form-control" placeholder="Hoy" name="hasta" [(ngModel)]="hasta" ngbDatepicker
+                        #d2="ngbDatepicker" id="hasta">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                            <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button (click)="onClick()" class="btn btn-info mt-3 search">Buscar</button>
+    </form>
+
+    <app-tabla (accion)="descargar($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+    <p class="conta">Reportar documento perdido</p>
+>>>>>>> e7c49b7d9a172d403efe578f236c652b79e3527c
 </div>

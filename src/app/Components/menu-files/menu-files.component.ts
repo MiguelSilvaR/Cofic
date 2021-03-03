@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu-files',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuFilesComponent implements OnInit {
 
-  constructor() { }
+  departamento!: string | null
+
+  constructor(
+    private router: ActivatedRoute
+  ) {
+    this.departamento = this.router.snapshot.paramMap.get("department")
+    console.log(this.departamento)
+  }
 
   ngOnInit(): void {
   }

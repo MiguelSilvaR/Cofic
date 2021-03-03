@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IconDefinition, faDownload, faTrash, faCheckCircle, faSearch, faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,9 +18,16 @@ export class TablaComponent implements OnInit {
   faSearch: IconDefinition = faSearch
   faPen: IconDefinition = faPen
 
+  @Output() accion = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emitAction(msg: string, element: any) {
+    let infoAccion = [msg, element]
+    this.accion.emit(JSON.stringify(infoAccion))
   }
 
 }

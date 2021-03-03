@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="px-3">
     <div class="">
         <p>Portak > Nóminas > 2021</p>
@@ -46,4 +47,55 @@
         <fa-icon [icon]="faUserPlus" class="upload mr-5"></fa-icon>
     </div>
     <app-tabla [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+=======
+<div class="px-3">
+    <div class="">
+        <p><a [routerLink]="['/menu']">Portal</a> > Usuarios</p>
+    </div>
+
+    <form class="mb-5" [formGroup]="adminForm">
+        <div class="form-inline">
+            <div class="form-group mr-md-4 mt-3">
+                <div class="input-group d-flex align-items-center">
+                    <label for="usuario" class="">Usuario: </label>
+                    <select class="form-control" id="usuario" formControlName="usuario">
+                        <option value="">Selecciona una opción</option>
+                        <option value="todos">Todos</option>
+                        <option value="operador">Operador</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="superisor">Supervisor</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="input-group d-flex align-items-center">
+                    <label for="estado" class="">Estado: </label>
+                    <select class="form-control" id="estado" formControlName="estado">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Todos">Todos</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <small id="userError"
+            *ngIf="this.adminForm.controls['usuario'].invalid && this.adminForm.controls['usuario'].touched"
+            class="form-text text-muted error">
+            Selecciona un usuario
+        </small>
+        <small id="estadoError"
+            *ngIf="this.adminForm.controls['estado'].invalid && this.adminForm.controls['estado'].touched"
+            class="form-text text-muted error">
+            Selecciona un estado
+        </small>
+        <button (click)="sendInfo()" [disabled]="this.adminForm.invalid"
+            class="btn btn-info mt-3 search">Buscar</button>
+    </form>
+    <div class="d-flex justify-content-end">
+        <fa-icon [routerLink]="['/agregar-usuario']" [icon]="faUserPlus" class="upload mr-5"></fa-icon>
+    </div>
+    <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+>>>>>>> e7c49b7d9a172d403efe578f236c652b79e3527c
 </div>

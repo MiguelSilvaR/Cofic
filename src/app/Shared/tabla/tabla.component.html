@@ -8,11 +8,11 @@
     <tr *ngFor="let element of data">
       <td *ngFor="let item of element">{{item}}</td>
       <td class="icons">
-        <fa-icon [icon]="faDownload" class="icono" *ngIf="operations[0]"></fa-icon>
-        <fa-icon [icon]="faTrash" class="icono" *ngIf="operations[1]"></fa-icon>
-        <fa-icon [icon]="faCheckCircle" class="icono" *ngIf="operations[2]"></fa-icon>
-        <fa-icon [icon]="faSearch" class="icono" *ngIf="operations[3]"></fa-icon>
-        <fa-icon [icon]="faPen" class="icono" *ngIf="operations[4]"></fa-icon>
+        <fa-icon (click)="emitAction('descargar', element)" [icon]="faDownload" class="icono" *ngIf="operations[0]"></fa-icon>
+        <fa-icon (click)="emitAction('eliminar', element)" [icon]="faTrash" class="icono" *ngIf="operations[1]"></fa-icon>
+        <fa-icon (click)="emitAction('validar', element)" [icon]="faCheckCircle" class="icono" *ngIf="operations[2]"></fa-icon>
+        <fa-icon (click)="emitAction('buscar', element)" [icon]="faSearch" class="icono" *ngIf="operations[3]"></fa-icon>
+        <fa-icon (click)="emitAction('editar', element)" [icon]="faPen" class="icono" *ngIf="operations[4]"></fa-icon>
       </td>
     </tr>
   </tbody>
