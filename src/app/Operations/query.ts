@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import gql from 'graphql-tag'
-
-export const auth = gql`
-    mutation auth($usuario: ObtainJSONWebTokenInput!) {
-        tokenAuth(input: $usuario) {
-            token
-        }
-    }
-`
-
-export const getFile = gql`
-    query getFile($name: String) {
-        getFile(filename: $name)
-    } 
-=======
 import gql from 'graphql-tag'
 
 export const auth = gql`
@@ -86,5 +70,4 @@ export const getAllFiles = gql`
             }
         }
     }
->>>>>>> e7c49b7d9a172d403efe578f236c652b79e3527c
 `
