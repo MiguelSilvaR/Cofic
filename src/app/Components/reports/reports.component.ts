@@ -97,9 +97,9 @@ export class ReportsComponent implements OnInit {
     this.query.executeQuery(this.query.getOptions(allUsersAdmin, "network-only",
       undefined, { headers: this.auth.generateAuthHeader() })).subscribe(
         (data: any) => {
-          let tempArr = data.data.allUsuarios.edges.map(
+          let tempArr = data.data.allUsuarios.map(
             (value: any) => {
-              return [value.node.username,value.node.id]
+              return [value.username,value.id]
             }
           );
           this.users = tempArr;
