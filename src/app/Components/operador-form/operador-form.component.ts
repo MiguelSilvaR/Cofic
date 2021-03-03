@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OperadorForm } from 'src/app/Interfaces/OperadorForm.interface';
+import { allClientes } from 'src/app/Operations/query';
+import { AuthService } from 'src/app/Services/auth/auth.service';
 import { FilesService } from 'src/app/Services/Files/files.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
 
@@ -13,6 +15,7 @@ export class OperadorFormComponent implements OnInit {
 
   files: File[] = [];
   years: any = new Array(52)
+  clientes: any = []
 
   operadorForm: FormGroup = new FormGroup({
     "cliente": new FormControl("", [Validators.required]),
@@ -21,10 +24,13 @@ export class OperadorFormComponent implements OnInit {
   })
 
   constructor(
-    private _files: FilesService  ) { }
+    private _files: FilesService,
+    private query: QueryService,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.operadorForm.controls['cliente'].invalid)
+    this.getClientes()
   }
 
   onSelect(event: any) {
@@ -37,6 +43,18 @@ export class OperadorFormComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+  getClientes() {
+    this.query.executeQuery(
+      this.query.getOptions(allClientes, "network-only", undefined, { headers: this.auth.generateAuthHeader() })
+    ).subscribe(
+      (data: any) => {
+        console.log(data)
+        this.clientes = data.data.allClientes
+      },
+      (err) => console.log(err)
+    )
+  }
+
   getFormValues(): OperadorForm {
     return {
       "cliente": this.operadorForm.controls["cliente"].value,
@@ -46,9 +64,9 @@ export class OperadorFormComponent implements OnInit {
   }
 
   sendInfo() {
-    console.log(this.getFormValues())
+    console.log(this.files[0].name)
     let filters = this.getFormValues()
-    this._files.sendFile(this.files[0], filters.periodo ).subscribe(
+    this._files.sendFile(this.files[0], filters.periodo, filters.cliente ).subscribe(
       (data) => console.log(data),
       (err) => console.log(err)
     )

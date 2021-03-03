@@ -13,9 +13,12 @@ export class MenuComponent implements OnInit {
     "contabilidad": "/menu-files/contabilidad",
     "recursoshumanos": "/menu-files/recursoshumanos",
     "documentacion": "/menu-files/documentacion",
-    "administrador": "/administrador", 
-    "crear-aviso": "/crear-aviso", 
-    "files-admin": "/files-admin"
+    "administrador": "/administrador",
+    "crear-aviso": "/crear-aviso",
+    "files-admin": "/files-admin",
+    "operador": "/operador",
+    "supervisor": "/supervisor", 
+    "notificacion": "/notificacion"
   }
 
   menu: any = []
@@ -27,7 +30,16 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     if (this.auth.rol == "cliente") {
       this.menu = this.auth.departamentos
-    } else if(this.auth.rol == "administrador") {
+      if (!this.menu.includes("documentacion")) {
+        this.menu.push("documentacion")
+      }
+    } else if (this.auth.rol == "administrador") {
+      this.menu = ["administrador", "crear-aviso", "files-admin"]
+    } else if (this.auth.rol == "operador") {
+      this.menu = ["operador"]
+    } else if (this.auth.rol == "supervisor") {
+      this.menu = ["supervisor", "notificacion"]
+    }else if (this.auth.rol == "recepcion") {
       this.menu = ["administrador", "crear-aviso", "files-admin"]
     }
   }

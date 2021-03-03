@@ -17,3 +17,21 @@ export const nuevoAnuncio = gql`
 		}
 	}
 `
+
+export const nuevoUser = gql`
+	mutation createUser($user:CreateUserMutationInput!) {
+		createUsuario(input:$user) {
+			user {
+				id
+			}
+		}
+	}
+`
+
+export const resolveNot = gql`
+	mutation resolveNotificacion($id: NotificacionResueltaMutationInput!) {
+		notificacionResuelta(input: $id) {
+			success
+		}
+	}
+`

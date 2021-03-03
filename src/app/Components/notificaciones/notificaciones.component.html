@@ -1,7 +1,7 @@
 
 <div class="container">
     <div class="row my-5">
-        <p class="ml-3">Portal > Carga de documentos</p>
+        <p><a [routerLink]="['/menu']">Portal</a>  > Notificaciones</p>
     </div>
-    <app-tabla [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+    <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
 </div>
