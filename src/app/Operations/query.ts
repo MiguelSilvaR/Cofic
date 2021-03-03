@@ -43,6 +43,7 @@ export const allUsersAdmin = gql`
         allUsuarios {
             edges {
                 node {
+                    id
                     username
                     email
                     telefono
@@ -69,5 +70,17 @@ export const getAllFiles = gql`
                 }
             }
         }
+    }
+`
+
+export const getStatsUser = gql`
+    query getStats($fechaInicio: Date!, $fechaFinal: Date!, $usuario: String) {
+        getStats(fechaInicio: $fechaInicio, fechaFinal: $fechaFinal, usuario: $usuario)
+    }
+`
+
+export const getStats = gql`
+    query getStats($fechaInicio: Date!, $fechaFinal: Date!) {
+        getStats(fechaInicio: $fechaInicio, fechaFinal: $fechaFinal)
     }
 `

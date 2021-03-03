@@ -95,7 +95,6 @@ export class AuthService {
   }
 
   generateAuthHeader(): HttpHeaders {
-    console.log("JWT " + this.getToken())
     return new HttpHeaders({
       Authorization: "JWT " + this.getToken()
     })

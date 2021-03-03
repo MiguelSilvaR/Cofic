@@ -7,7 +7,7 @@
         <div class="input-group d-flex align-items-center">
           <label for="desde" class="">Desde: </label>
           <input class="form-control" placeholder="Desde el inicio de los tiempos" name="desde" [(ngModel)]="desde"
-            ngbDatepicker #d="ngbDatepicker" id="desde">
+            ngbDatepicker #d="ngbDatepicker" id="desde" (dateSelect)="onClick()">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
               <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
@@ -20,7 +20,7 @@
         <div class="input-group d-flex align-items-center">
           <label for="hasta" class="">Hasta: </label>
           <input class="form-control" placeholder="Hoy" name="hasta" [(ngModel)]="hasta" ngbDatepicker
-            #d2="ngbDatepicker" id="hasta">
+            #d2="ngbDatepicker" id="hasta" (dateSelect)="onClick()">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
               <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
@@ -31,25 +31,26 @@
 
       <div class="form-group mt-3">
         <div class="input-group d-flex align-items-center">
-          
+
           <label for="Usuario" class=""> Usuario: </label>
-          
-          <select [(ngModel)] = "selected_user" name="selected_user">
-            <option *ngFor="let user of users" [value] = "user.id" >{{user.name}}</option>
+
+          <select [(ngModel)]="selected_user" name="selected_user" (change)="onClick()">
+            <option *ngFor="let user of users" [value]="user[1]">{{user[0]}}</option>
           </select>
-          
         </div>
       </div>
 
+      <button (click)="reset()" class="btn btn-info mt-3 search">Reset</button>
     </div>
-    <button (click)="onClick()" class="btn btn-info mt-3 search">Buscar</button>
+
     <div class="d-flex justify-content-center">
-      <div style="display: block; width: 50%;">
+      <div style="display: block; width: 75%;">
         <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
           [legend]="barChartLegend" [chartType]="barChartType">
         </canvas>
       </div>
     </div>
+
 
   </form>
 </div>

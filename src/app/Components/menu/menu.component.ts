@@ -15,7 +15,8 @@ export class MenuComponent implements OnInit {
     "documentacion": "/menu-files/documentacion",
     "administrador": "/administrador", 
     "crear-aviso": "/crear-aviso", 
-    "files-admin": "/files-admin"
+    "files-admin": "/files-admin",
+    "reports": "/reports"
   }
 
   menu: any = []
@@ -28,7 +29,7 @@ export class MenuComponent implements OnInit {
     if (this.auth.rol == "cliente") {
       this.menu = this.auth.departamentos
     } else if(this.auth.rol == "administrador") {
-      this.menu = ["administrador", "crear-aviso", "files-admin"]
+      this.menu = ["administrador", "crear-aviso", "files-admin","reports"]
     }
   }
 
