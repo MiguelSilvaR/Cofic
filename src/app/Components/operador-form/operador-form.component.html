@@ -72,7 +72,7 @@
 =======
 <div class="container">
     <div class="row mt-5">
-        <p class="ml-3">Portal > Carga de documentos</p>
+        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/operador']">Operador</a> > Cargar Archivos</p>
     </div>
     <div class="mt-5">
         <form class="row" [formGroup]="operadorForm">
@@ -87,10 +87,8 @@
                         <label for="cliente" class="mr-2">Cliente*: </label>
                         <select class="form-control" id="cliente" formControlName="cliente">
                             <option value="">Seleccione un cliente</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            <option value="volvo">Todos</option>
+                            <option *ngFor="let cliente of clientes" [value]="cliente.email">{{ cliente.nombreContacto }}</option>
                         </select>
                     </div>
                     <small id="clienteError"
@@ -135,7 +133,7 @@
             <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-info mr-3" (click)="sendInfo()"
                     [disabled]="this.operadorForm.invalid || this.files.length == 0">Cargar archivo</button>
-                <button class="btn btn-danger">Cancelar</button>
+                <button class="btn btn-danger" [routerLink]="['/operador']">Cancelar</button>
             </div>
         </form>
     </div>

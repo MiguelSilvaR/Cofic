@@ -11,8 +11,7 @@
                     <select class="form-control" id="cliente" formControlName="cliente">
                         <option value="volvo">Selecciona una opcion</option>
                         <option value="todos">Todos</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        <option *ngFor="let cliente of clientes" [value]="cliente.nombreContacto">{{ cliente.nombreContacto }}</option>
                     </select>
                 </div>
             </div>

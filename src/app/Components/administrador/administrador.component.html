@@ -62,9 +62,10 @@
                         <option value="">Selecciona una opción</option>
                         <option value="todos">Todos</option>
                         <option value="operador">Operador</option>
+                        <option value="recepcion">Recepcion</option>
                         <option value="cliente">Cliente</option>
                         <option value="administrador">Administrador</option>
-                        <option value="superisor">Supervisor</option>
+                        <option value="supervisor">Supervisor</option>
                     </select>
                 </div>
             </div>
@@ -96,6 +97,11 @@
     <div class="d-flex justify-content-end">
         <fa-icon [routerLink]="['/agregar-usuario']" [icon]="faUserPlus" class="upload mr-5"></fa-icon>
     </div>
+<<<<<<< HEAD
     <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
 >>>>>>> e7c49b7d9a172d403efe578f236c652b79e3527c
+=======
+    <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data">
+    </app-tabla>
+>>>>>>> e9ad91d9140f9026ae09732535edd3d30e027807
 </div>
