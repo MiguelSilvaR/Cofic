@@ -42,15 +42,13 @@ export const getPossibleFiles = gql`
 export const allUsersAdmin = gql`
     query allUsuarios {
         allUsuarios {
-            edges {
-                node {
-                    username
-                    email
-                    telefono
-                    rol
-                    activo
-                }
-            }
+            id
+            username
+            email
+            telefono
+            rol
+            activo
+
         }
     }
 `

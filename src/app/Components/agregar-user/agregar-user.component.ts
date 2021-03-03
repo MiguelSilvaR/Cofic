@@ -15,6 +15,7 @@ export class AgregarUserComponent implements OnInit {
   operador: boolean = false
   admin: boolean = false
   supervisor: boolean = false
+  recepcion: boolean = false
 
   agregarUser: FormGroup = new FormGroup({
     "user": new FormControl("", [Validators.required]),
@@ -38,6 +39,7 @@ export class AgregarUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.recepcion = this.auth.rol == "recepcion" ? true : false
   }
 
   getFormValues(): AgregarUserForm {

@@ -24,6 +24,8 @@ export class AdministradorComponent implements OnInit {
   operations: any = [];
   data: any = [];
 
+  recepcion: boolean = false
+
   constructor(
     private query: QueryService,
     private auth: AuthService
@@ -32,6 +34,7 @@ export class AdministradorComponent implements OnInit {
   ngOnInit(): void {
     this.headers = ["Nombre completo", "Correo", "Telefono", "Tipo de usuario", "Estado", "Operaciones"]
     this.operations = [false, true, false, true, true]
+    this.recepcion = this.auth.rol == "recepcion" ? true : false
   }
 
   getFormValues(): AdminTableSearchForm {
@@ -46,10 +49,10 @@ export class AdministradorComponent implements OnInit {
       undefined, { headers: this.auth.generateAuthHeader() })).subscribe(
         (data: any) => {
           let filters = this.getFormValues()
-          let tempArr = data.data.allUsuarios.edges.map(
+          let tempArr = data.data.allUsuarios.map(
             (value: any) => {
               console.log(value)
-              return [value.node.username, value.node.email, value.node.telefono, value.node.rol, value.node.activo ? "Activo":"Inactivo"]
+              return [value.username, value.email, value.telefono, value.rol, value.activo ? "Activo":"Inactivo"]
             }
           )
           this.data = tempArr.filter(
