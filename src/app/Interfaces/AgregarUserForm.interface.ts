@@ -10,4 +10,6 @@ export interface AgregarUserForm {
     conta: string
     rh: string
     activo: string
+    radio: string
+    password: string
 }

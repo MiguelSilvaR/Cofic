@@ -34,6 +34,7 @@ export const getPossibleFiles = gql`
             cliente {
                 nombreContacto
             }
+            estado
         }
     }
 `
@@ -41,15 +42,13 @@ export const getPossibleFiles = gql`
 export const allUsersAdmin = gql`
     query allUsuarios {
         allUsuarios {
-            edges {
-                node {
-                    username
-                    email
-                    telefono
-                    rol
-                    activo
-                }
-            }
+            id
+            username
+            email
+            telefono
+            rol
+            activo
+
         }
     }
 `
@@ -67,6 +66,36 @@ export const getAllFiles = gql`
                     createdAt
                     estado
                 }
+            }
+        }
+    }
+`
+
+export const getStatsUser = gql`
+    query getStats($fechaInicio: Date!, $fechaFinal: Date!, $usuario: String) {
+        getStats(fechaInicio: $fechaInicio, fechaFinal: $fechaFinal, usuario: $usuario)
+    }
+`
+
+export const allClientes = gql`
+    query allClientes {
+        allClientes {
+            id
+            nombreContacto
+            email
+        }
+    }
+`
+
+export const notificaciones = gql`
+    query notificaciones {
+        getNotificaciones {
+            id
+            tipoNotificacion
+            departamento
+            createdAt
+            usuario {
+                email
             }
         }
     }
