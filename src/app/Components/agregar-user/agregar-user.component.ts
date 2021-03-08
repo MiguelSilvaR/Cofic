@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AgregarUserForm } from 'src/app/Interfaces/AgregarUserForm.interface';
 import { nuevoUser } from 'src/app/Operations/mutation';
 import { AuthService } from 'src/app/Services/auth/auth.service';
@@ -35,7 +36,8 @@ export class AgregarUserComponent implements OnInit {
 
   constructor(
     private mutation: MutationService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,8 +67,14 @@ export class AgregarUserComponent implements OnInit {
       this.mutation.getOptions(nuevoUser,{ user: this.buildVariables(this.getFormValues()) },
       { headers: this.auth.generateAuthHeader() })
     ).subscribe(
-      (data) => console.log(data),
-      (err) => console.log(err)
+      (data) => {
+        alert("Nuevo usuario agregado")
+        this.router.navigateByUrl("/")
+      },
+      (err) => {
+        alert("Error")
+        this.router.navigateByUrl("/")
+      }
     )
   }
 

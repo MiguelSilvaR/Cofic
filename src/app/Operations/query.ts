@@ -58,6 +58,7 @@ export const getAllFiles = gql`
         allFiles {
             edges {
                 node {
+                    id
                     nombre
                     archivo
                     cliente {
@@ -97,6 +98,16 @@ export const notificaciones = gql`
             usuario {
                 email
             }
+        }
+    }
+`
+
+export const getAnuncios = gql`
+    query getAnuncios {
+        getAnuncios {
+            id
+            tipoUsuario
+            notificacion
         }
     }
 `

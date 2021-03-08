@@ -11,7 +11,8 @@
                     <select class="form-control" id="cliente" formControlName="cliente">
                         <option value="volvo">Selecciona una opcion</option>
                         <option value="todos">Todos</option>
-                        <option *ngFor="let cliente of clientes" [value]="cliente.nombreContacto">{{ cliente.nombreContacto }}</option>
+                        <option *ngFor="let cliente of clientes" [value]="cliente.nombreContacto">{{
+                            cliente.nombreContacto }}</option>
                     </select>
                 </div>
             </div>
@@ -23,6 +24,7 @@
                         <option value="todos">Todos</option>
                         <option value="cargado">Cargado</option>
                         <option value="validado">Validado</option>
+                        <option value="borrado">Borrado</option>
                     </select>
                 </div>
             </div>
@@ -32,7 +34,8 @@
                 <div class="input-group d-flex align-items-center">
                     <label for="desde" class="">Desde: </label>
                     <input class="form-control" placeholder="Desde el inicio de los tiempos" name="desde"
-                        [(ngModel)]="desde" [ngModelOptions]="{standalone: true}" ngbDatepicker #d="ngbDatepicker" id="desde">
+                        [(ngModel)]="desde" [ngModelOptions]="{standalone: true}" ngbDatepicker #d="ngbDatepicker"
+                        id="desde">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
                             <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
@@ -43,8 +46,8 @@
             <div class="form-group mt-3">
                 <div class="input-group d-flex align-items-center">
                     <label for="hasta" class="">Hasta: </label>
-                    <input class="form-control" placeholder="Hoy" name="hasta" [(ngModel)]="hasta" [ngModelOptions]="{standalone: true}" ngbDatepicker
-                        #d2="ngbDatepicker" id="hasta">
+                    <input class="form-control" placeholder="Hoy" name="hasta" [(ngModel)]="hasta"
+                        [ngModelOptions]="{standalone: true}" ngbDatepicker #d2="ngbDatepicker" id="hasta">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
                             <fa-icon [icon]="faCalendar" class="icono"></fa-icon>
@@ -55,5 +58,6 @@
         </div>
         <button (click)="onClick()" class="btn btn-info mt-3 search">Buscar</button>
     </form>
-    <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
+    <app-tabla (accion)="actionReceiver($event)" [headers]="headers" [operations]="operations" [data]="data">
+    </app-tabla>
 </div>

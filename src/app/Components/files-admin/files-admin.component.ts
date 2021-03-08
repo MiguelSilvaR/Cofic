@@ -5,6 +5,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { allClientes, getAllFiles, getFile } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
+import { compareAsc } from 'date-fns'
+import { Router } from '@angular/router';
 import { compareAsc, compareDesc } from 'date-fns'
 
 @Component({
@@ -29,12 +31,13 @@ export class FilesAdminComponent implements OnInit {
 
   constructor(
     private query: QueryService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.headers = ["Nombre del documento", "Cliente", "Tipo de archivo", "Fecha de carga", "Estado", "Operaciones"]
-    this.operations = [true, true, true, false, false]
+    this.headers = ["Nombre del documento", "Cliente", "Tipo de archivo", "Fecha de carga", "Estado", "id", "Operaciones"]
+    this.operations = [true, false, false, false, true]
     this.getClientes()
   }
 
@@ -72,18 +75,18 @@ export class FilesAdminComponent implements OnInit {
         let tempArr = data.data.allFiles.edges.map(
           (value: any) => {
             let fileArr = value.node.archivo.split(".")
-            return [fileArr[0], value.node.cliente.nombreContacto, fileArr[1], value.node.createdAt, value.node.estado]
+            return [value.node.nombre, value.node.cliente == null ? "Todos" : value.node.cliente.nombreContacto, fileArr[1], value.node.createdAt, value.node.estado, value.node.id]
           }
         )
-        
+
         this.data = tempArr.filter(
           (value: any) => {
-            let since = this.desde.year == 0 ? new Date(8640000000000000) :new Date(this.desde.year, this.desde.month - 1, this.desde.day)
-            let until = new Date(this.hasta.year,this.hasta.month-1,this.hasta.day)
+            let since = new Date(this.desde.year, this.desde.month - 1, this.desde.day)
+            let until = new Date(this.hasta.year, this.hasta.month - 1, this.hasta.day)
             let fileFecha = new Date(value[3])
-            return compareDesc(since, fileFecha) == 1 && compareDesc(fileFecha, until) == 1 
-            && (value[4] == filters.estado || filters.estado == "todos")
-            && (value[1] == filters.cliente || filters.cliente == "todos")
+            return compareAsc(fileFecha, since) >= 0 && compareAsc(until, fileFecha) >= 0
+              && (value[4] == filters.estado || filters.estado == "todos")
+              && (value[1] == filters.cliente || filters.cliente == "todos")
           }
         )
       },
@@ -97,6 +100,9 @@ export class FilesAdminComponent implements OnInit {
     console.log(tempArr)
     if (tempArr[0] == "descargar") {
       this.getFile(tempArr[1][0] + "." + tempArr[1][2], tempArr[1][2])
+    }
+    if (tempArr[0] == "editar") {
+      this.editar(tempArr[1][5])
     }
   }
 
@@ -113,6 +119,11 @@ export class FilesAdminComponent implements OnInit {
         },
         (err) => console.log(err)
       )
+  }
+
+  editar(id: any) {
+    id = encodeURIComponent(id)
+    this.router.navigateByUrl(`/update/${id}`)
   }
 
 }

@@ -29,6 +29,9 @@ import { FilesAdminComponent } from './Components/files-admin/files-admin.compon
 import { CrearAvisoComponent } from './Components/crear-aviso/crear-aviso.component';
 import { GraphQLModule } from './GraphQL/graphql.module';
 import { ReportsComponent } from './Components/reports/reports.component';
+import { PerdidoComponent } from './Components/perdido/perdido.component';
+import { UserModalComponent } from './Components/user-modal/user-modal.component';
+import { UpdateFileComponent } from './Components/update-file/update-file.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { ReportsComponent } from './Components/reports/reports.component';
     AgregarUserComponent,
     FilesAdminComponent,
     CrearAvisoComponent,
-    ReportsComponent
+    ReportsComponent,
+    PerdidoComponent,
+    UserModalComponent,
+    UpdateFileComponent
   ],
   imports: [
     AppRoutingModule,

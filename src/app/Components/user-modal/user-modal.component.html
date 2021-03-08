@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title">Información: </h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>ID: {{id}}</p>
+    <p>Nombre: {{name}}</p>
+    <p>Correo: {{correo}}</p>
+    <p>Telefono: {{phono}}</p>
+    <p>Tipo de usuario: {{userType}}</p>
+    <p>Estado: {{estado}}</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Salir</button>
+</div>

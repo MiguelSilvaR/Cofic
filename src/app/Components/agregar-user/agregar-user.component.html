@@ -51,7 +51,7 @@
                 </div>
                 <div class="input-group mb-4 d-flex flex-column" *ngIf="!admin">
                     <label for="cliente" class="mr-2 titulo">Departamentos*: </label>
-                    <div *ngIf="operador; else elseBlock">
+                    <div *ngIf="operador || supervisor; else elseBlock">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="radio" id="exampleRadios1" value="nomina"
                                 formControlName="radio">

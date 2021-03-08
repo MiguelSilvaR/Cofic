@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { nuevoAnuncio } from 'src/app/Operations/mutation';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { MutationService } from 'src/app/Services/Mutation/mutation.service';
@@ -18,7 +19,8 @@ export class CrearAvisoComponent implements OnInit {
 
   constructor(
     private mutation: MutationService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +41,12 @@ export class CrearAvisoComponent implements OnInit {
         (data) => {
           console.log(data)
           alert("Mensaje enviado con éxito")
+          this.router.navigateByUrl("/")
         },
-        (err) => console.log(err)
+        (err) => {
+          alert("Error")
+          this.router.navigateByUrl("/")
+        }
       )
 
   }
