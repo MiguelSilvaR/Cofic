@@ -5,7 +5,6 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { allClientes, getAllFiles, getFile } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
-import { compareAsc } from 'date-fns'
 import { Router } from '@angular/router';
 import { compareAsc, compareDesc } from 'date-fns'
 
