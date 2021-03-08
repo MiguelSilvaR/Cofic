@@ -72,6 +72,12 @@ export const getAllFiles = gql`
     }
 `
 
+export const getStatsUser = gql`
+    query getStats($fechaInicio: Date!, $fechaFinal: Date!, $usuario: String) {
+        getStats(fechaInicio: $fechaInicio, fechaFinal: $fechaFinal, usuario: $usuario)
+    }
+`
+
 export const allClientes = gql`
     query allClientes {
         allClientes {

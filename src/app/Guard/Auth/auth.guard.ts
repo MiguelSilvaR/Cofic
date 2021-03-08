@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     "recepcion": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso", "perdido"],
     "operador": ["menu-files", "menu", "operador", "operador-form", "perdido", "update"],
     "supervisor": ["menu-files", "menu", "supervisor", "notificacion", "operador-form", "perdido", "update"],
-    "administrador": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso", "files-admin", "operador-form", "notificacion", "perdido", "update"]
+    "administrador": ["menu-files", "menu", "administrador", "agregar-usuario", "crear-aviso", "files-admin", "operador-form", "notificacion", "reports", "perdido","update"]
   }
 
   canActivate(

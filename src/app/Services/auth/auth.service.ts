@@ -91,11 +91,9 @@ export class AuthService {
     this.storage.remove("departamentos");
     this.storage.remove("rol");
     this.tokenService.deleteToken();
-    //console.log(this.tokenService.jwtToken)
   }
 
   generateAuthHeader(): HttpHeaders {
-    //console.log("JWT " + this.getToken())
     return new HttpHeaders({
       Authorization: "JWT " + this.getToken()
     })

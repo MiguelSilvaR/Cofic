@@ -18,6 +18,7 @@ import { RecursosHumanosComponent } from './Components/recursos-humanos/recursos
 import { SupervisorComponent } from './Components/supervisor/supervisor.component';
 import { UpdateFileComponent } from './Components/update-file/update-file.component';
 import { AuthGuard } from './Guard/Auth/auth.guard';
+import { ReportsComponent} from './Components/reports/reports.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: "files-admin", component: FilesAdminComponent, canActivate: [AuthGuard] },
   { path: "perdido", component: PerdidoComponent, canActivate: [AuthGuard] },
   { path: "update/:id", component: UpdateFileComponent, canActivate: [AuthGuard] },
+  { path: "reports", component: ReportsComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 

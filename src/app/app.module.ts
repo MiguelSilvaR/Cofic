@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppComponent } from './app.component';
+import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './Components/login/login.component';
 import { TituloComponent } from './Shared/titulo/titulo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,6 +28,7 @@ import { AgregarUserComponent } from './Components/agregar-user/agregar-user.com
 import { FilesAdminComponent } from './Components/files-admin/files-admin.component';
 import { CrearAvisoComponent } from './Components/crear-aviso/crear-aviso.component';
 import { GraphQLModule } from './GraphQL/graphql.module';
+import { ReportsComponent } from './Components/reports/reports.component';
 import { PerdidoComponent } from './Components/perdido/perdido.component';
 import { UserModalComponent } from './Components/user-modal/user-modal.component';
 import { UpdateFileComponent } from './Components/update-file/update-file.component';
@@ -51,19 +53,21 @@ import { UpdateFileComponent } from './Components/update-file/update-file.compon
     AgregarUserComponent,
     FilesAdminComponent,
     CrearAvisoComponent,
+    ReportsComponent,
     PerdidoComponent,
     UserModalComponent,
     UpdateFileComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    ChartsModule,
     FontAwesomeModule,
-    NgbModule,
     FormsModule,
+    GraphQLModule,
     HttpClientModule,
     NgxDropzoneModule,
-    GraphQLModule,
+    NgbModule,
     ReactiveFormsModule
   ],
   providers: [],

@@ -14,6 +14,10 @@ export class DateService {
   }
   
   getDefaultDesde(): NgbDateStruct {
-    return { day: 0 , month: 0 , year: 0 }
+    return { day: 1 , month: 1 , year: 1970 }
+  }
+
+  getString(date :NgbDateStruct){
+    return date.year + "-" + date.month.toString().padStart(2,"0") + "-" + date.day.toString().padStart(2,"0");
   }
 }

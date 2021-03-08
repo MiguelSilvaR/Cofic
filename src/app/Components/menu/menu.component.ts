@@ -23,8 +23,9 @@ export class MenuComponent implements OnInit {
     "crear-aviso": "/crear-aviso",
     "files-admin": "/files-admin",
     "operador": "/operador",
-    "supervisor": "/supervisor",
-    "notificacion": "/notificacion"
+    "supervisor": "/supervisor", 
+    "notificacion": "/notificacion",
+    "reports": "/reports"
   }
 
   menu: any = []
@@ -43,7 +44,7 @@ export class MenuComponent implements OnInit {
         this.menu.push("documentacion")
       }
     } else if (this.auth.rol == "administrador") {
-      this.menu = ["administrador", "crear-aviso", "files-admin", "notificacion"]
+      this.menu = ["administrador", "crear-aviso", "files-admin", "notificacion", "reports"]
     } else if (this.auth.rol == "operador") {
       this.menu = ["operador"]
     } else if (this.auth.rol == "supervisor") {
