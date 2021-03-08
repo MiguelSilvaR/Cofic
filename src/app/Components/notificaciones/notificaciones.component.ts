@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { resolveNot } from 'src/app/Operations/mutation';
 import { notificaciones } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
@@ -20,7 +21,8 @@ export class NotificacionesComponent implements OnInit {
   constructor(
     private query: QueryService,
     private auth: AuthService,
-    private mutation: MutationService
+    private mutation: MutationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,8 +50,14 @@ export class NotificacionesComponent implements OnInit {
   resolveNotificaion(info: string) {
     this.mutation.executeMutation(this.mutation.getOptions(resolveNot, { id: { id: info } }, { headers: this.auth.generateAuthHeader() }))
     .subscribe(
-      (data) => console.log(data),
-      (err) => console.log(err)
+      (data) => {
+        alert("Notificación resuelta")
+        this.router.navigateByUrl("/")
+      },
+      (err) => {
+        alert("Error")
+        this.router.navigateByUrl("/")
+      }
     )
   }
 

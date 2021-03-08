@@ -24,8 +24,8 @@ export class AuthService {
     private storage: LocalStorageService,
     private tokenService: JWTService) { }
 
-  changeState() {
-    this.myObservable.next(!this.myObservable.value)
+  changeState(value: boolean) {
+    this.myObservable.next(value)
   }
 
   isTokenValid(): boolean {
@@ -44,13 +44,13 @@ export class AuthService {
       this.departamentos = dep != null ? JSON.parse(dep) : [];
       let token = this.storage.get("token");
       this.tokenService.setToken(token == null ? "" : token);
-      this.changeState()
+      this.changeState(true)
       if (!this.isTokenValid()) {
         this.storage.remove("token");
         this.storage.remove("departamentos");
         this.storage.remove("rol");
         this.tokenService.deleteToken()
-        this.changeState()
+        this.changeState(false)
       }
     }
   }
@@ -86,16 +86,16 @@ export class AuthService {
   }
 
   logout() {
-    this.changeState();
+    this.changeState(false);
     this.storage.remove("token");
     this.storage.remove("departamentos");
     this.storage.remove("rol");
     this.tokenService.deleteToken();
-    console.log(this.tokenService.jwtToken)
+    //console.log(this.tokenService.jwtToken)
   }
 
   generateAuthHeader(): HttpHeaders {
-    console.log("JWT " + this.getToken())
+    //console.log("JWT " + this.getToken())
     return new HttpHeaders({
       Authorization: "JWT " + this.getToken()
     })

@@ -1,49 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { OperadorForm } from 'src/app/Interfaces/OperadorForm.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { updateFile } from 'src/app/Operations/mutation';
 import { allClientes } from 'src/app/Operations/query';
 import { AuthService } from 'src/app/Services/auth/auth.service';
-import { FilesService } from 'src/app/Services/Files/files.service';
+import { MutationService } from 'src/app/Services/Mutation/mutation.service';
 import { QueryService } from 'src/app/Services/Query/query.service';
 
 @Component({
-  selector: 'app-operador-form',
-  templateUrl: './operador-form.component.html',
-  styleUrls: ['./operador-form.component.scss']
+  selector: 'app-update-file',
+  templateUrl: './update-file.component.html',
+  styleUrls: ['./update-file.component.scss']
 })
-export class OperadorFormComponent implements OnInit {
+export class UpdateFileComponent implements OnInit {
 
-  files: File[] = [];
   years: any = new Array(52)
   clientes: any = []
 
   operadorForm: FormGroup = new FormGroup({
     "cliente": new FormControl("", []),
     "periodo": new FormControl("", [Validators.required]),
-    "tipoDoc": new FormControl("", [Validators.required]),
+    "nombre": new FormControl("", [Validators.required]),
     "categoria": new FormControl("", [Validators.required])
   })
 
   constructor(
-    private _files: FilesService,
     private query: QueryService,
     private auth: AuthService,
-    private router: Router
+    private router: ActivatedRoute,
+    private mutation: MutationService,
+    private rter: Router
   ) { }
 
   ngOnInit(): void {
     this.getClientes()
-  }
-
-  onSelect(event: any) {
-    if (this.files.length !== 0)
-      this.files.pop()
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: any) {
-    this.files.splice(this.files.indexOf(event), 1);
   }
 
   getClientes() {
@@ -58,26 +48,31 @@ export class OperadorFormComponent implements OnInit {
     )
   }
 
-  getFormValues(): OperadorForm {
+  getFormValues(): any {
+    let id = this.router.snapshot.paramMap.get("id")
+    id = id != null ? id : ""
     return {
-      "cliente": this.operadorForm.controls["cliente"].value,
+      "id": decodeURIComponent(id),
+      "correoCliente": this.operadorForm.controls["cliente"].value,
       "periodo": parseInt(this.operadorForm.controls["periodo"].value),
-      "tipoDoc": this.operadorForm.controls["tipoDoc"].value,
+      "nombre": this.operadorForm.controls["nombre"].value,
       "categoria": this.operadorForm.controls["categoria"].value
     }
   }
 
   sendInfo() {
-    console.log(this.files[0].name)
     let filters = this.getFormValues()
-    this._files.sendFile(this.files[0], filters.periodo, filters.cliente, filters.categoria ).subscribe(
+    console.log(filters)
+    this.mutation.executeMutation(
+      this.mutation.getOptions(updateFile, { file: filters }, { headers: this.auth.generateAuthHeader() })
+    ).subscribe(
       (data) => {
-        alert("Archivo cargado con éxito")
-        this.router.navigateByUrl("/")
+        alert("Exito al actualizar archivo")
+        this.rter.navigateByUrl("/")
       },
       (err) => {
         alert("Error")
-        this.router.navigateByUrl("/")
+        this.rter.navigateByUrl("/")
       }
     )
   }

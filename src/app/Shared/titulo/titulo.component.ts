@@ -20,7 +20,7 @@ export class TituloComponent implements OnInit {
     this.isLoggedIn = this.auth.myObservable.value
     this.auth.myObservable$.subscribe(
       (value) => {
-        console.log(value)
+        console.log("He cambiado ", value)
         this.isLoggedIn = value
       },
       (err) => {

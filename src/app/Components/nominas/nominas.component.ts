@@ -90,7 +90,7 @@ export class NominasComponent implements OnInit {
         let tempArr = data.data.getPossibleFiles.map(
           (value: any) => {
             let fileArr = value.archivo.split(".")
-            return [fileArr[0], value.periodo, fileArr[1], value.createdAt]
+            return [value.nombre, value.periodo, fileArr[1], value.createdAt]
           }
         )
         this.data = tempArr.filter(
@@ -109,7 +109,7 @@ export class NominasComponent implements OnInit {
             }else {
               yearTemp = parseInt(this.year) == value[1] ? true : false
             }
-            return compareAsc(since, fileFecha) == 1 && compareAsc(fileFecha, until) == 1 && yearTemp
+            return compareAsc(fileFecha, since) >= 0 && compareAsc(until, fileFecha) >= 0 && yearTemp
           }
           )
       },

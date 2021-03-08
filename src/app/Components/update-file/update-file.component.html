@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row mt-5">
-        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/operador']">Operador</a> > Cargar Archivos</p>
+        <p><a [routerLink]="['/menu']">Portal</a> > Actualizar Archivos</p>
     </div>
     <div class="mt-5">
         <form class="row" [formGroup]="operadorForm">
@@ -16,8 +16,7 @@
                         <select class="form-control" id="cliente" formControlName="cliente">
                             <option value="">Seleccione un cliente</option>
                             <option value="">Todos</option>
-                            <option *ngFor="let cliente of clientes" [value]="cliente.email">{{ cliente.nombreContacto
-                                }}</option>
+                            <option *ngFor="let cliente of clientes" [value]="cliente.email">{{ cliente.nombreContacto }}</option>
                         </select>
                     </div>
                     <small id="clienteError"
@@ -33,21 +32,13 @@
                         </select>
                     </div>
                     <small id="clienteError"
-                        *ngIf="this.operadorForm.controls['tipoDoc'].invalid && this.operadorForm.controls['tipoDoc'].touched"
+                        *ngIf="this.operadorForm.controls['nombre'].invalid && this.operadorForm.controls['nombre'].touched"
                         class="form-text text-muted error">
-                        Selecciona una opcion
+                        Agregue un nombre
                     </small>
                     <div class="input-group mb-4 d-flex align-items-center">
-                        <label for="tipoDoc" class="mr-2">Tipo de documento*: </label>
-                        <select class="form-control" id="tipoDoc" formControlName="tipoDoc">
-                            <option value="">Seleccione un tipo de documento</option>
-                            <option value="pdf">PDF</option>
-                            <option value="xml">XML</option>
-                            <option value="xls">XLS</option>
-                            <option value="rar">RAR</option>
-                            <option value="zip">ZIP</option>
-                            <option value="doc">DOC</option>
-                        </select>
+                        <label for="nombre" class="mr-2">Nombre*: </label>
+                        <input type="text" class="form-control" formControlName="nombre">
                     </div>
                     <small id="clienteError"
                         *ngIf="this.operadorForm.controls['categoria'].invalid && this.operadorForm.controls['categoria'].touched"
@@ -58,19 +49,13 @@
                         <label for="categoria" class="mr-2">Categoría*: </label>
                         <input type="text" class="form-control" formControlName="categoria">
                     </div>
+                    
                 </div>
             </div>
-            <div class="col-md-6">
-                <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
-                    <ngx-dropzone-label>Arrastralo aquí o da click</ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                    </ngx-dropzone-preview>
-                </ngx-dropzone>
-            </div>
+
             <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-info mr-3" (click)="sendInfo()"
-                    [disabled]="this.operadorForm.invalid || this.files.length == 0">Cargar archivo</button>
+                    [disabled]="this.operadorForm.invalid">Cargar archivo</button>
                 <button class="btn btn-danger" [routerLink]="['/operador']">Cancelar</button>
             </div>
         </form>

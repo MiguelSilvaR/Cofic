@@ -13,8 +13,10 @@ import { NominasComponent } from './Components/nominas/nominas.component';
 import { NotificacionesComponent } from './Components/notificaciones/notificaciones.component';
 import { OperadorFormComponent } from './Components/operador-form/operador-form.component';
 import { OperadorComponent } from './Components/operador/operador.component';
+import { PerdidoComponent } from './Components/perdido/perdido.component';
 import { RecursosHumanosComponent } from './Components/recursos-humanos/recursos-humanos.component';
 import { SupervisorComponent } from './Components/supervisor/supervisor.component';
+import { UpdateFileComponent } from './Components/update-file/update-file.component';
 import { AuthGuard } from './Guard/Auth/auth.guard';
 
 const routes: Routes = [
@@ -33,6 +35,8 @@ const routes: Routes = [
   { path: "agregar-usuario", component: AgregarUserComponent, canActivate: [AuthGuard] },
   { path: "crear-aviso", component: CrearAvisoComponent, canActivate: [AuthGuard] },
   { path: "files-admin", component: FilesAdminComponent, canActivate: [AuthGuard] },
+  { path: "perdido", component: PerdidoComponent, canActivate: [AuthGuard] },
+  { path: "update/:id", component: UpdateFileComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 

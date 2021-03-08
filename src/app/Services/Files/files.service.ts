@@ -15,7 +15,7 @@ export class FilesService {
     private auth: AuthService
   ) { }
 
-  getQueryInfo(periodo: any, email:any, file: File): any {
+  getQueryInfo(periodo: any, email:any, file: File, categoria: any): any {
     return {
       query: `
         mutation fileUpload($file: UploadFileMutationInput!){
@@ -23,7 +23,7 @@ export class FilesService {
             success
           }
         }`,
-      variables: {"file": {"nombre": file.name, "departamento": this.auth.rol == "administrador" ? "documentacion" : this.auth.departamentos.join(), "correoCliente": email, "periodo": periodo}},
+      variables: {"file": {"nombre": file.name, "departamento": this.auth.rol == "administrador" ? "documentacion" : this.auth.departamentos.join(), "correoCliente": email, "periodo": periodo, "categoria": categoria}},
       "operationName": "fileUpload"
     }
   }
@@ -34,16 +34,16 @@ export class FilesService {
     }
   }
 
-  getFormData(file: File, periodo: any, email: any): FormData {
+  getFormData(file: File, periodo: any, email: any, categoria: any): FormData {
     let fd = new FormData()
-    let operations = JSON.stringify(this.getQueryInfo(periodo,email, file));
+    let operations = JSON.stringify(this.getQueryInfo(periodo,email, file, categoria));
     fd.append('operations', operations)
     fd.append('archivo', file, file.name)
     return fd;
   }
 
-  sendFile(file: File, periodo: any, email: any) {
-    console.log(this.getFormData(file, periodo, email))
-    return this.http.post(this.url, this.getFormData(file, periodo, email), { headers: this.auth.generateAuthHeader()})
+  sendFile(file: File, periodo: any, email: any, categoria: any) {
+    console.log(this.getFormData(file, periodo, email, categoria))
+    return this.http.post(this.url, this.getFormData(file, periodo, email, categoria), { headers: this.auth.generateAuthHeader()})
   }
 }

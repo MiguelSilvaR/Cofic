@@ -34,5 +34,5 @@
     </form>
 
     <app-tabla (accion)="descargar($event)" [headers]="headers" [operations]="operations" [data]="data"></app-tabla>
-    <p class="conta">Reportar documento perdido</p>
-</div>
+    <p class="conta" [routerLink]="['/perdido']">Reportar documento perdido</p>
+</div> 

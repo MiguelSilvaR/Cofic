@@ -1,27 +1,22 @@
 <div class="container">
     <div class="row mt-5">
-        <p><a [routerLink]="['/menu']">Portal</a> > <a [routerLink]="['/operador']">Operador</a> > Cargar Archivos</p>
+        <p><a [routerLink]="['/menu']">Portal</a> > Archivo Perdido</p>
     </div>
     <div class="mt-5">
-        <form class="row" [formGroup]="operadorForm">
-            <div class="col-md-6">
+        <form class="row" [formGroup]="perdidoForm">
+            <div class="col-12">
                 <div class="form-group">
                     <small id="clienteError"
-                        *ngIf="this.operadorForm.controls['cliente'].invalid && this.operadorForm.controls['cliente'].touched"
+                        *ngIf="this.perdidoForm.controls['nombre'].invalid && this.perdidoForm.controls['nombre'].touched"
                         class="form-text text-muted error">
                         Selecciona una opcion
                     </small>
                     <div class="input-group mb-4 d-flex align-items-center">
-                        <label for="cliente" class="mr-2">Cliente*: </label>
-                        <select class="form-control" id="cliente" formControlName="cliente">
-                            <option value="">Seleccione un cliente</option>
-                            <option value="">Todos</option>
-                            <option *ngFor="let cliente of clientes" [value]="cliente.email">{{ cliente.nombreContacto
-                                }}</option>
-                        </select>
+                        <label for="nombre" class="mr-2">Nombre del archivo*: </label>
+                        <input type="text" id="nombre" class="form-control" formControlName="nombre">
                     </div>
                     <small id="clienteError"
-                        *ngIf="this.operadorForm.controls['periodo'].invalid && this.operadorForm.controls['periodo'].touched"
+                        *ngIf="this.perdidoForm.controls['periodo'].invalid && this.perdidoForm.controls['periodo'].touched"
                         class="form-text text-muted error">
                         Selecciona una opcion
                     </small>
@@ -33,7 +28,7 @@
                         </select>
                     </div>
                     <small id="clienteError"
-                        *ngIf="this.operadorForm.controls['tipoDoc'].invalid && this.operadorForm.controls['tipoDoc'].touched"
+                        *ngIf="this.perdidoForm.controls['tipoDoc'].invalid && this.perdidoForm.controls['tipoDoc'].touched"
                         class="form-text text-muted error">
                         Selecciona una opcion
                     </small>
@@ -50,28 +45,26 @@
                         </select>
                     </div>
                     <small id="clienteError"
-                        *ngIf="this.operadorForm.controls['categoria'].invalid && this.operadorForm.controls['categoria'].touched"
+                        *ngIf="this.perdidoForm.controls['departamento'].invalid && this.perdidoForm.controls['departamento'].touched"
                         class="form-text text-muted error">
-                        Agregue una categoria
+                        Selecciona una opcion
                     </small>
                     <div class="input-group mb-4 d-flex align-items-center">
-                        <label for="categoria" class="mr-2">Categoría*: </label>
-                        <input type="text" class="form-control" formControlName="categoria">
+                        <label for="departamento" class="mr-2">Tipo de documento*: </label>
+                        <select class="form-control" id="departamento" formControlName="departamento">
+                            <option value="">Seleccione un departamento</option>
+                            <option value="contabilidad">Contabilidad</option>
+                            <option value="nomina">Nomina</option>
+                            <option value="recursoshumanos">Recursos Humanos</option>
+                            <option value="documentacion">Documentacion</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
-                    <ngx-dropzone-label>Arrastralo aquí o da click</ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                    </ngx-dropzone-preview>
-                </ngx-dropzone>
-            </div>
             <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-info mr-3" (click)="sendInfo()"
-                    [disabled]="this.operadorForm.invalid || this.files.length == 0">Cargar archivo</button>
-                <button class="btn btn-danger" [routerLink]="['/operador']">Cancelar</button>
+                    [disabled]="this.perdidoForm.invalid">Cargar archivo</button>
+                <button class="btn btn-danger" [routerLink]="['/menu']">Cancelar</button>
             </div>
         </form>
     </div>
