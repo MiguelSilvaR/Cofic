@@ -109,6 +109,8 @@ export class AdministradorComponent implements OnInit {
       this.eliminar(info[1][0])
     } else if (info[0] == "buscar") {
       this.buscar(info[1])
+    } else if (info[0] == "editar") {
+      this.router.navigateByUrl("/update-user/"+encodeURIComponent(info[1][0]))
     }
   }
 
