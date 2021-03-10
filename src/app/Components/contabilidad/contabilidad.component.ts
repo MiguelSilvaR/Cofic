@@ -90,7 +90,7 @@ export class ContabilidadComponent implements OnInit {
     let tempArr = JSON.parse(event)
     console.log(tempArr)
     if (tempArr[0] == "descargar") {
-      this.getFile(tempArr[1][0] + "." + tempArr[1][2], tempArr[1][2])
+      this.getFile(tempArr[1][0], tempArr[1][2])
     }
   }
 
