@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row mt-5">
+        <p><a [routerLink]="['/menu']">Portal</a> > Modificar user</p>
+    </div>
+    <div class="mt-5">
+        <form class="row" action="" [formGroup]="editarUser">
+            <div class="col-12">
+                <div class="input-group mb-4 d-flex align-items-center">
+                    <label for="cliente" class="mr-2 titulo">Correo*: </label>
+                    <input type="text" class="form-control" formControlName="correo">
+                </div>
+                <div class="input-group mb-4 d-flex align-items-center">
+                    <label for="cliente" class="mr-2 titulo">Contraseña*: </label>
+                    <input type="password" class="form-control" formControlName="password">
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-5">
+                <button class="btn btn-info mr-3" (click)="sendInfo()">Guardar</button>
+                <button class="btn btn-danger" [routerLink]="['/menu']" routerLinkActive="router-link-active" >Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

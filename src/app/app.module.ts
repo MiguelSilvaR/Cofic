@@ -30,6 +30,7 @@ import { GraphQLModule } from './GraphQL/graphql.module';
 import { PerdidoComponent } from './Components/perdido/perdido.component';
 import { UserModalComponent } from './Components/user-modal/user-modal.component';
 import { UpdateFileComponent } from './Components/update-file/update-file.component';
+import { EditarUserComponent } from './Components/editar-user/editar-user.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UpdateFileComponent } from './Components/update-file/update-file.compon
     CrearAvisoComponent,
     PerdidoComponent,
     UserModalComponent,
-    UpdateFileComponent
+    UpdateFileComponent,
+    EditarUserComponent
   ],
   imports: [
     BrowserModule,

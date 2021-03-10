@@ -5,6 +5,7 @@ import { AgregarUserComponent } from './Components/agregar-user/agregar-user.com
 import { ContabilidadComponent } from './Components/contabilidad/contabilidad.component';
 import { CrearAvisoComponent } from './Components/crear-aviso/crear-aviso.component';
 import { DocumentacionComponent } from './Components/documentacion/documentacion.component';
+import { EditarUserComponent } from './Components/editar-user/editar-user.component';
 import { FilesAdminComponent } from './Components/files-admin/files-admin.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MenuFilesComponent } from './Components/menu-files/menu-files.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: "crear-aviso", component: CrearAvisoComponent, canActivate: [AuthGuard] },
   { path: "files-admin", component: FilesAdminComponent, canActivate: [AuthGuard] },
   { path: "perdido", component: PerdidoComponent, canActivate: [AuthGuard] },
+  { path: "update-user/:id", component: EditarUserComponent },
   { path: "update/:id", component: UpdateFileComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];

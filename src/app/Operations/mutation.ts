@@ -79,3 +79,13 @@ export const updateFile = gql`
 		}
 	}
 `
+
+export const updateUser = gql`
+	mutation updateUser($usuarioCliente: UpdateUserMutationInput!) {
+		updateUsuario(input: $usuarioCliente) {
+			user {
+				id
+			}
+		}
+	}
+`
