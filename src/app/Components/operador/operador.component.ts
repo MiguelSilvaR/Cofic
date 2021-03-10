@@ -107,7 +107,7 @@ export class OperadorComponent implements OnInit {
     let tempArr = JSON.parse(event)
     console.log(tempArr)
     if (tempArr[0] == "descargar") {
-      this.getFile(tempArr[1][1] + "." + tempArr[1][3], tempArr[1][3])
+      this.getFile(tempArr[1][1], tempArr[1][3])
     }
     if (tempArr[0] == "eliminar") {
       this.eliminar(tempArr[1][0])
